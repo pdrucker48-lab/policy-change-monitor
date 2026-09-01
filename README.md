@@ -6,6 +6,17 @@ Give it public terms, privacy, DPA, pricing, SLA, or acceptable-use URLs. The fi
 
 No external AI API or API key is required.
 
+## Best for
+
+- Vendor-risk and procurement teams watching supplier contracts
+- Privacy and compliance teams tracking policy, DPA, and data-use changes
+- SaaS operators monitoring platform pricing, API limits, SLAs, and acceptable-use rules
+- Agencies and consultants who need dated before-and-after evidence for clients
+
+## Pricing
+
+**$0.004 per page check** (US$4 per 1,000 checks). Each URL processed counts as one page check. Baselines, unchanged results, errors, and change records are not charged a second time.
+
 ## What it reports
 
 - Exact added, removed, and modified clause fragments
@@ -17,11 +28,13 @@ No external AI API or API key is required.
 
 ## Quick start on Apify
 
-1. Create a new Actor from this GitHub repository.
-2. Build it with the included Dockerfile.
-3. Enter one or more public URLs in **Pages to monitor** and run it once to establish baselines.
-4. Create an Apify schedule for the Actor or save the input as an Actor Task and schedule that Task.
+1. Click **Try for free** on the Actor page.
+2. Add one or more public URLs under **Pages to monitor**.
+3. Run once to establish clean baselines.
+4. Save the input as an Actor Task and add a daily or weekly Apify schedule.
 5. Keep the same **Snapshot storage name** on future runs. A different name creates an independent set of baselines.
+
+The next scheduled run reports `unchanged`, `changed`, or `error` for every monitored page. Add an HTTPS webhook if you want alerts delivered to your existing workflow.
 
 Example input:
 
@@ -110,13 +123,7 @@ This Actor:
 
 Respect website terms, robots policies, applicable law, and reasonable request frequency. The output is triage information, not legal advice.
 
-## Monetization setup
-
-The source records one `page-check` pay-per-event event before each page is processed and stops gracefully when the user's run limit is reached. The Store price is **$0.004 per page check** (US$4 per 1,000 checks). Baselines, unchanged results, errors, and change records are not double-charged. Unchanged records are enabled by default so every healthy scheduled run produces a verifiable dataset result; set `emitUnchanged` to `false` if you only want change and error records.
-
-Test the billing path locally with `ACTOR_TEST_PAY_PER_EVENT=true`; the Apify SDK writes test events to its local charging log.
-
-## Local development
+## For source reviewers and developers
 
 Requires Node.js 20 or later.
 
@@ -127,6 +134,8 @@ pnpm start
 ```
 
 For a local Actor run, place input at `storage/key_value_stores/default/INPUT.json`. Local storage is excluded from Git.
+
+The source records one `page-check` pay-per-event event before each page is processed and stops gracefully when the user's run limit is reached. Test the billing path locally with `ACTOR_TEST_PAY_PER_EVENT=true`; the Apify SDK writes test events to its local charging log.
 
 ## Current V1 limitations
 
