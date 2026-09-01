@@ -3,6 +3,7 @@ FROM apify/actor-node:20
 COPY package.json pnpm-lock.yaml ./
 RUN corepack enable \
     && corepack prepare pnpm@10.34.5 --activate \
+    && rm -rf node_modules \
     && pnpm install --prod --frozen-lockfile \
     && echo "Installed NPM packages:"
 
