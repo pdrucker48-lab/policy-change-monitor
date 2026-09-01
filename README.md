@@ -59,6 +59,16 @@ Example input:
 
 The complete example is in [`examples/input.json`](examples/input.json).
 
+## Ready-made monitoring pages
+
+Use a focused public task when you want a one-click starting point:
+
+- [Terms of Service Change Monitor](https://apify.com/peterdrucker481/policy-change-monitor/examples/terms-change-monitor)
+- [Privacy Policy Change Monitor](https://apify.com/peterdrucker481/policy-change-monitor/examples/privacy-policy-change-monitor)
+- [Vendor DPA Change Monitor](https://apify.com/peterdrucker481/policy-change-monitor/examples/vendor-dpa-change-monitor)
+
+Matching task inputs are kept in [`examples/terms-task.json`](examples/terms-task.json), [`examples/privacy-task.json`](examples/privacy-task.json), and [`examples/vendor-dpa-task.json`](examples/vendor-dpa-task.json). Replace the example URL with the vendor page you want to monitor, then schedule the task daily or weekly.
+
 ## Output
 
 Each emitted dataset item has this shape:

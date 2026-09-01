@@ -1,0 +1,11 @@
+{
+  "pages": [
+    {
+      "url": "https://openai.com/policies/data-processing-addendum/",
+      "label": "OpenAI Data Processing Addendum"
+    }
+  ],
+  "stateStoreName": "vendor-dpa-monitor-baselines",
+  "emitBaselines": true,
+  "emitUnchanged": false
+}

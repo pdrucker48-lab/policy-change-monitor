@@ -1,0 +1,11 @@
+{
+  "pages": [
+    {
+      "url": "https://docs.apify.com/legal/privacy-policy",
+      "label": "Apify Privacy Policy"
+    }
+  ],
+  "stateStoreName": "privacy-monitor-baselines",
+  "emitBaselines": true,
+  "emitUnchanged": false
+}
