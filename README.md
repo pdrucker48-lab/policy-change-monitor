@@ -130,7 +130,7 @@ For a local Actor run, place input at `storage/key_value_stores/default/INPUT.js
 
 ## Current V1 limitations
 
-- Server-rendered HTML and plain-text pages only; JavaScript-only pages may need a browser-based fallback in a later version.
+- Server-rendered HTML, Markdown, and plain-text pages only; JavaScript-only pages may need a browser-based fallback in a later version.
 - Classification is keyword-based and intentionally explainable. It flags likely materiality but does not replace legal review.
 - Moves and substantial rewrites can appear as separate removed and added clauses.
 

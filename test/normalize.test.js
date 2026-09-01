@@ -42,3 +42,14 @@ test('normalization supports custom noise patterns', () => {
         'You must pay all subscription fees within 30 days.',
     ]);
 });
+
+test('normalization accepts Markdown and plain-text policy responses', () => {
+    const result = normalizeHtml('# Terms\n\nSubscription fees are billed monthly.\n\n## Termination\n\nEither party may terminate with 30 days notice.');
+
+    assert.deepEqual(result.blocks, [
+        '# Terms',
+        'Subscription fees are billed monthly.',
+        '## Termination',
+        'Either party may terminate with 30 days notice.',
+    ]);
+});

@@ -95,7 +95,7 @@ export async function fetchPublicPage(value, {
                 redirect: 'manual',
                 signal: controller.signal,
                 headers: {
-                    accept: 'text/html,application/xhtml+xml,text/plain;q=0.8,*/*;q=0.1',
+                    accept: 'text/html,application/xhtml+xml,text/markdown;q=0.9,text/plain;q=0.8,*/*;q=0.1',
                     'user-agent': 'PolicyChangeMonitor/0.1 (+https://github.com/pdrucker48-lab/policy-change-monitor)',
                 },
             });
@@ -117,7 +117,7 @@ export async function fetchPublicPage(value, {
         if (!response.ok) throw new Error(`HTTP ${response.status} returned for ${currentUrl}`);
 
         const contentType = response.headers.get('content-type')?.toLowerCase() ?? '';
-        if (contentType && !contentType.includes('text/html') && !contentType.includes('application/xhtml+xml') && !contentType.includes('text/plain')) {
+        if (contentType && !contentType.includes('text/html') && !contentType.includes('application/xhtml+xml') && !contentType.includes('text/markdown') && !contentType.includes('text/plain')) {
             throw new Error(`Unsupported content type ${contentType} for ${currentUrl}`);
         }
 
