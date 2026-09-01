@@ -19,6 +19,14 @@ For larger portfolios, one run can monitor up to 500 pages with bounded concurre
 
 **$0.004 per page check** (US$4 per 1,000 checks). Each URL processed counts as one page check. Baselines, unchanged results, errors, and change records are not charged a second time.
 
+| Portfolio | Schedule | Approximate monthly cost |
+| --- | --- | ---: |
+| 25 pages | Daily | $3.00 |
+| 100 pages | Daily | $12.00 |
+| 500 pages | Daily | $60.00 |
+
+Start with the [Enterprise Vendor Policy Pack](https://apify.com/peterdrucker481/policy-change-monitor/examples/enterprise-vendor-policy-pack), or open the [Policy Change Monitor Actor](https://apify.com/peterdrucker481/policy-change-monitor) to monitor your own vendor register.
+
 ## What it reports
 
 - Exact added, removed, and modified clause fragments
@@ -68,10 +76,11 @@ Use a focused public task when you want a one-click starting point:
 - [Terms of Service Change Monitor](https://apify.com/peterdrucker481/policy-change-monitor/examples/terms-change-monitor)
 - [Privacy Policy Change Monitor](https://apify.com/peterdrucker481/policy-change-monitor/examples/privacy-policy-change-monitor)
 - [Vendor DPA Change Monitor](https://apify.com/peterdrucker481/policy-change-monitor/examples/vendor-dpa-change-monitor)
+- [Enterprise Vendor Policy Pack](https://apify.com/peterdrucker481/policy-change-monitor/examples/enterprise-vendor-policy-pack)
 
 Matching task inputs are kept in [`examples/terms-task.json`](examples/terms-task.json), [`examples/privacy-task.json`](examples/privacy-task.json), and [`examples/vendor-dpa-task.json`](examples/vendor-dpa-task.json). Replace the example URL with the vendor page you want to monitor, then schedule the task daily or weekly.
 
-For a multi-vendor starting point, use [`examples/enterprise-vendor-policy-pack.json`](examples/enterprise-vendor-policy-pack.json). It includes eight public AI, cloud, and payments policy pages and should be customized to match the user's real vendor register.
+For a multi-vendor starting point, use [`examples/enterprise-vendor-policy-pack.json`](examples/enterprise-vendor-policy-pack.json). It includes eight public AI, cloud, and payments policy pages and should be customized to match the user's real vendor register. Additional focused inputs cover [SaaS pricing and billing](examples/pricing-billing-task.json), [service-level agreements](examples/sla-task.json), and [API acceptable-use policies](examples/api-acceptable-use-task.json).
 
 ## Output
 

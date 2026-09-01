@@ -1,0 +1,12 @@
+{
+  "pages": [
+    {
+      "url": "https://stripe.com/legal/ssa",
+      "label": "Stripe Services Agreement"
+    }
+  ],
+  "stateStoreName": "saas-pricing-billing-monitor",
+  "emitBaselines": true,
+  "emitUnchanged": true,
+  "maxConcurrency": 3
+}

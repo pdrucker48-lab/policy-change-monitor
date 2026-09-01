@@ -1,0 +1,12 @@
+{
+  "pages": [
+    {
+      "url": "https://aws.amazon.com/legal/service-level-agreements/",
+      "label": "AWS Service Level Agreements"
+    }
+  ],
+  "stateStoreName": "vendor-sla-monitor",
+  "emitBaselines": true,
+  "emitUnchanged": true,
+  "maxConcurrency": 3
+}

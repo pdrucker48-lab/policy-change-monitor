@@ -1,0 +1,12 @@
+{
+  "pages": [
+    {
+      "url": "https://openai.com/policies/usage-policies/",
+      "label": "OpenAI Usage Policies"
+    }
+  ],
+  "stateStoreName": "api-acceptable-use-monitor",
+  "emitBaselines": true,
+  "emitUnchanged": true,
+  "maxConcurrency": 3
+}
