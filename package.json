@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Apify Actor that monitors public policy and contract pages for material changes.",
   "type": "module",
+  "packageManager": "pnpm@10.34.5",
   "engines": {
     "node": ">=20"
   },
