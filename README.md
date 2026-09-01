@@ -29,11 +29,11 @@ Example input:
 {
   "pages": [
     {
-      "url": "https://www.apify.com/terms-and-conditions",
+      "url": "https://docs.apify.com/legal/general-terms-and-conditions",
       "label": "Apify Terms"
     },
     {
-      "url": "https://www.apify.com/privacy-policy",
+      "url": "https://docs.apify.com/legal/privacy-policy",
       "label": "Apify Privacy"
     }
   ],
