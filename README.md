@@ -13,6 +13,8 @@ No external AI API or API key is required.
 - SaaS operators monitoring platform pricing, API limits, SLAs, and acceptable-use rules
 - Agencies and consultants who need dated before-and-after evidence for clients
 
+For larger portfolios, one run can monitor up to 500 pages with bounded concurrency. See the [bulk vendor-register onboarding guide](docs/BULK-ONBOARDING.md).
+
 ## Pricing
 
 **$0.004 per page check** (US$4 per 1,000 checks). Each URL processed counts as one page check. Baselines, unchanged results, errors, and change records are not charged a second time.
@@ -68,6 +70,8 @@ Use a focused public task when you want a one-click starting point:
 - [Vendor DPA Change Monitor](https://apify.com/peterdrucker481/policy-change-monitor/examples/vendor-dpa-change-monitor)
 
 Matching task inputs are kept in [`examples/terms-task.json`](examples/terms-task.json), [`examples/privacy-task.json`](examples/privacy-task.json), and [`examples/vendor-dpa-task.json`](examples/vendor-dpa-task.json). Replace the example URL with the vendor page you want to monitor, then schedule the task daily or weekly.
+
+For a multi-vendor starting point, use [`examples/enterprise-vendor-policy-pack.json`](examples/enterprise-vendor-policy-pack.json). It includes eight public AI, cloud, and payments policy pages and should be customized to match the user's real vendor register.
 
 ## Output
 

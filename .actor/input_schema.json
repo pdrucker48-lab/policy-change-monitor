@@ -17,7 +17,7 @@
         }
       ],
       "minItems": 1,
-      "maxItems": 100,
+      "maxItems": 500,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -109,6 +109,14 @@
       "default": 2000000,
       "minimum": 10000,
       "maximum": 10000000
+    },
+    "maxConcurrency": {
+      "title": "Concurrent page checks",
+      "type": "integer",
+      "description": "Number of pages checked at once. Five is a balanced default for large vendor registers.",
+      "default": 5,
+      "minimum": 1,
+      "maximum": 10
     }
   },
   "required": ["pages"]

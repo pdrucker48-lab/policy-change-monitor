@@ -1,12 +1,14 @@
 import { Actor, log } from 'apify';
 import { monitorPage } from './monitor.js';
 import { deliverWebhook } from './webhook.js';
+import { mapWithConcurrency, normalizeConcurrency } from './concurrency.js';
 
 function validateInput(input) {
     if (!input || !Array.isArray(input.pages) || input.pages.length === 0) {
         throw new Error('Input must include at least one page in the pages array');
     }
-    if (input.pages.length > 100) throw new Error('A maximum of 100 pages can be monitored per run');
+    if (input.pages.length > 500) throw new Error('A maximum of 500 pages can be monitored per run');
+    normalizeConcurrency(input.maxConcurrency ?? 5);
     for (const [index, page] of input.pages.entries()) {
         if (!page || typeof page.url !== 'string' || page.url.length === 0) {
             throw new Error(`pages[${index}].url must be a non-empty string`);
@@ -29,6 +31,7 @@ async function runActor() {
         webhookBearerToken,
         requestTimeoutSecs = 30,
         maxResponseBytes = 2_000_000,
+        maxConcurrency = 5,
     } = input;
 
     const stateStore = await Actor.openKeyValueStore(stateStoreName);
@@ -36,11 +39,14 @@ async function runActor() {
     const changes = [];
     const counters = { checked: 0, baseline: 0, changed: 0, unchanged: 0, error: 0 };
 
-    for (const page of pages) {
+    let limitReached = false;
+    const processed = await mapWithConcurrency(pages, maxConcurrency, async (page) => {
+        if (limitReached) return null;
         const chargeResult = await Actor.charge({ eventName: 'page-check' });
         if (chargeResult.eventChargeLimitReached) {
-            log.warning('The run spending limit was reached; remaining pages will not be checked.');
-            break;
+            if (!limitReached) log.warning('The run spending limit was reached; remaining pages will not be checked.');
+            limitReached = true;
+            return null;
         }
 
         try {
@@ -51,18 +57,9 @@ async function runActor() {
                 timeoutMs: requestTimeoutSecs * 1_000,
                 maxResponseBytes,
             });
-            counters.checked += 1;
-            counters[record.status] += 1;
-            records.push(record);
-            if (record.status === 'changed') changes.push(record);
-
-            const shouldEmit = record.status === 'changed'
-                || (record.status === 'baseline' && emitBaselines)
-                || (record.status === 'unchanged' && emitUnchanged);
-            if (shouldEmit) await Actor.pushData(record);
             log.info(`${record.status.toUpperCase()}: ${record.label}`, { url: record.sourceUrl, materiality: record.materiality });
+            return record;
         } catch (error) {
-            counters.error += 1;
             const errorRecord = {
                 status: 'error',
                 label: page.label || page.url,
@@ -74,10 +71,25 @@ async function runActor() {
                 changedClauses: [],
                 error: error.message,
             };
-            records.push(errorRecord);
-            await Actor.pushData(errorRecord);
             log.error(`ERROR: ${errorRecord.label}`, { url: page.url, error: error.message });
+            return errorRecord;
         }
+    });
+
+    for (const record of processed.filter(Boolean)) {
+        records.push(record);
+        if (record.status === 'error') counters.error += 1;
+        else {
+            counters.checked += 1;
+            counters[record.status] += 1;
+        }
+        if (record.status === 'changed') changes.push(record);
+
+        const shouldEmit = record.status === 'changed'
+            || record.status === 'error'
+            || (record.status === 'baseline' && emitBaselines)
+            || (record.status === 'unchanged' && emitUnchanged);
+        if (shouldEmit) await Actor.pushData(record);
     }
 
     let webhook = { configured: Boolean(webhookUrl), delivered: false };
