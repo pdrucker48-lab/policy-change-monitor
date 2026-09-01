@@ -39,7 +39,7 @@ Example input:
   ],
   "stateStoreName": "vendor-policy-baselines",
   "emitBaselines": true,
-  "emitUnchanged": false,
+  "emitUnchanged": true,
   "webhookUrl": "https://hooks.example.com/policy-changes"
 }
 ```
@@ -112,7 +112,7 @@ Respect website terms, robots policies, applicable law, and reasonable request f
 
 ## Monetization setup
 
-The source records one `page-check` pay-per-event event before each page is processed and stops gracefully when the user's run limit is reached. A practical starting price is **$0.004 per page check** (US$4 per 1,000 checks). Configure that event in Apify Console when enabling pay-per-event pricing. Baselines, unchanged results, errors, and change records are not double-charged.
+The source records one `page-check` pay-per-event event before each page is processed and stops gracefully when the user's run limit is reached. The Store price is **$0.004 per page check** (US$4 per 1,000 checks). Baselines, unchanged results, errors, and change records are not double-charged. Unchanged records are enabled by default so every healthy scheduled run produces a verifiable dataset result; set `emitUnchanged` to `false` if you only want change and error records.
 
 Test the billing path locally with `ACTOR_TEST_PAY_PER_EVENT=true`; the Apify SDK writes test events to its local charging log.
 

@@ -22,7 +22,7 @@ async function runActor() {
         pages,
         stateStoreName = 'policy-change-monitor-snapshots',
         emitBaselines = true,
-        emitUnchanged = false,
+        emitUnchanged = true,
         ignoreSelectors = [],
         ignorePatterns = [],
         webhookUrl,
