@@ -1,0 +1,44 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "status": { "type": "string" },
+      "label": { "type": "string" },
+      "sourceUrl": { "type": "string" },
+      "checkedAt": { "type": "string", "format": "date-time" },
+      "previousCapturedAt": { "type": "string", "format": "date-time" },
+      "materiality": { "type": "string" },
+      "categories": { "type": "array", "items": { "type": "string" } },
+      "summary": { "type": "string" },
+      "changedClauses": { "type": "array", "items": { "type": "object" } },
+      "error": { "type": "string" }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "status",
+          "label",
+          "sourceUrl",
+          "checkedAt",
+          "materiality",
+          "categories",
+          "summary",
+          "changedClauses",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "sourceUrl": { "label": "Source", "format": "link" },
+          "checkedAt": { "label": "Checked", "format": "date" },
+          "changedClauses": { "label": "Clause changes", "format": "array" }
+        }
+      }
+    }
+  }
+}

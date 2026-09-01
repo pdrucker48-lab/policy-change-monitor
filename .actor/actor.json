@@ -1,0 +1,15 @@
+{
+  "actorSpecification": 1,
+  "name": "policy-change-monitor",
+  "title": "Policy & Terms Change Monitor",
+  "description": "Detect and classify meaningful changes to public terms, privacy, DPA, SLA, pricing, and acceptable-use pages.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "minMemoryMbytes": 256,
+  "maxMemoryMbytes": 1024,
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "storages": {
+    "dataset": "./dataset_schema.json"
+  }
+}

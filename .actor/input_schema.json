@@ -1,0 +1,115 @@
+{
+  "title": "Policy & Terms Change Monitor input",
+  "description": "Monitor public legal, policy, pricing, and service pages. The first run saves a baseline; later runs report meaningful changes.",
+  "type": "object",
+  "schemaVersion": 1,
+  "additionalProperties": false,
+  "properties": {
+    "pages": {
+      "title": "Pages to monitor",
+      "type": "array",
+      "description": "Public HTTP(S) pages. Add a short label such as Terms, Privacy, DPA, SLA, Pricing, or Acceptable Use.",
+      "editor": "schemaBased",
+      "prefill": [
+        {
+          "url": "https://www.apify.com/terms-and-conditions",
+          "label": "Terms"
+        }
+      ],
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "URL",
+            "description": "Public page URL beginning with http:// or https://.",
+            "editor": "textfield"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Optional human-readable document label.",
+            "editor": "textfield",
+            "maxLength": 100
+          }
+        },
+        "required": ["url"]
+      }
+    },
+    "stateStoreName": {
+      "title": "Snapshot storage name",
+      "type": "string",
+      "description": "Named key-value store used to keep baselines between runs. Use a different name for each independent monitor.",
+      "editor": "textfield",
+      "default": "policy-change-monitor-snapshots",
+      "minLength": 3,
+      "maxLength": 63
+    },
+    "emitBaselines": {
+      "title": "Output first-run baselines",
+      "type": "boolean",
+      "description": "Add a dataset item when a page is first recorded.",
+      "default": true
+    },
+    "emitUnchanged": {
+      "title": "Output unchanged pages",
+      "type": "boolean",
+      "description": "Add a dataset item even when no meaningful change is detected.",
+      "default": false
+    },
+    "ignoreSelectors": {
+      "title": "Additional CSS selectors to ignore",
+      "type": "array",
+      "description": "Optional selectors for dynamic or irrelevant page regions, such as .last-updated-banner.",
+      "editor": "stringList",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "ignorePatterns": {
+      "title": "Text patterns to ignore",
+      "type": "array",
+      "description": "Optional case-insensitive regular expressions. Matching text blocks are excluded from snapshots.",
+      "editor": "stringList",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "webhookUrl": {
+      "title": "Change webhook URL",
+      "type": "string",
+      "description": "Optional public HTTPS endpoint that receives one JSON payload after meaningful changes are found.",
+      "editor": "textfield",
+      "pattern": "^https://"
+    },
+    "webhookBearerToken": {
+      "title": "Webhook bearer token",
+      "type": "string",
+      "description": "Optional bearer token sent in the Authorization header.",
+      "editor": "textfield",
+      "isSecret": true
+    },
+    "requestTimeoutSecs": {
+      "title": "Request timeout",
+      "type": "integer",
+      "description": "Maximum seconds allowed for each page request.",
+      "default": 30,
+      "minimum": 5,
+      "maximum": 120
+    },
+    "maxResponseBytes": {
+      "title": "Maximum page size",
+      "type": "integer",
+      "description": "Maximum response size accepted per page, in bytes.",
+      "default": 2000000,
+      "minimum": 10000,
+      "maximum": 10000000
+    }
+  },
+  "required": ["pages"]
+}

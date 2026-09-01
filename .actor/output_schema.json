@@ -1,0 +1,17 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Policy & Terms Change Monitor output",
+  "description": "Baseline, change, unchanged, and error records for monitored pages.",
+  "properties": {
+    "results": {
+      "type": "string",
+      "title": "Monitoring results",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "runSummary": {
+      "type": "string",
+      "title": "Run summary",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/OUTPUT"
+    }
+  }
+}

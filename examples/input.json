@@ -1,0 +1,15 @@
+{
+  "pages": [
+    {
+      "url": "https://www.apify.com/terms-and-conditions",
+      "label": "Apify Terms"
+    },
+    {
+      "url": "https://www.apify.com/privacy-policy",
+      "label": "Apify Privacy"
+    }
+  ],
+  "stateStoreName": "my-policy-baselines",
+  "emitBaselines": true,
+  "emitUnchanged": false
+}
